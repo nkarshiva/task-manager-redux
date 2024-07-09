@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.task-list .task-item {
+  border-left-width: 4px;
+  border-left-color: #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+}
+
+.task-list .task-item:hover {
+  border-left-color: #999;
+}
