@@ -1,5 +1,13 @@
 # React + Vite
 
+Steps to reun the app
+
+- Clone the repo
+- Run npm run install
+- Run npm run dev
+
+App is ready to serve!!
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
