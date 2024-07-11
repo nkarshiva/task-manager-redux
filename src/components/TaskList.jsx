@@ -1,6 +1,19 @@
 import React from 'react';
 
-const TaskList = ({ tasks, editTask, deleteTask, toggleComplete }) => {
+const TaskList = ({ tasks, editTask, deleteTask, toggleComplete, highlight}) => {
+
+  const showHighLightedText = (text) =>(
+    
+   <div className='flex flex-row gap-x-1'>
+    {
+      text.split(" ").map((word)=>(
+        (word === highlight)? <span className='bg-[#FFFF00]'>{word}</span> : <span>{word}</span>
+      ))
+    }
+   </div>
+
+  )
+
   return (
     <div className="task-list">
       {tasks.length>0?<h1 className="text-2xl font-bold mb-4">Tasks</h1>:null}
@@ -12,9 +25,11 @@ const TaskList = ({ tasks, editTask, deleteTask, toggleComplete }) => {
           <div className="flex flex-col gap-y-2 sm:flex-row justify-start items-start sm:justify-between sm:items-center">
             <div className='flex flex-col justify-start'>
               <h3 className="text-xl font-bold">{task.title}</h3>
-              <p>{task.description}</p>
+              <p>{showHighLightedText(task.description)}</p>
+              {/* <p>{task.description}</p> */}
               <p className="text-sm text-gray-600">Due: {task.dueDate}</p>
               <p className="text-sm text-gray-600">Priority: {task.priority}</p>
+              <p className="text-sm text-gray-600">Duration: {task.duration}</p>
             </div>
             <div>
               <button

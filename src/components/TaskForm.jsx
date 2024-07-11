@@ -5,6 +5,7 @@ const TaskForm = ({ addTask, editingTask }) => {
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [priority, setPriority] = useState('');
+  const [duration, setDuration] = useState('');
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
@@ -13,6 +14,7 @@ const TaskForm = ({ addTask, editingTask }) => {
       setDescription(editingTask.task.description || '');
       setDueDate(editingTask.task.dueDate || '');
       setPriority(editingTask.task.priority || '');
+      setDuration(editingTask.task.duration || '');
     }
   }, [editingTask]);
 
@@ -24,17 +26,20 @@ const TaskForm = ({ addTask, editingTask }) => {
     if (!description) newErrors.description = 'Description is required';
     if (!dueDate) newErrors.dueDate = 'Due date is required';
     if (!priority) newErrors.priority = 'Priority is required';
+    if (!duration) newErrors.duration = 'Duration is required';
+
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
 
-    addTask({ title, description, dueDate, priority, completed: false });
+    addTask({ title, description, dueDate, priority, duration, completed: false });
     setTitle('');
     setDescription('');
     setDueDate('');
     setPriority('');
+    setDuration('')
     setErrors({});
   };
 
@@ -89,6 +94,25 @@ const TaskForm = ({ addTask, editingTask }) => {
             <option value="high">High</option>
           </select>
           {errors.priority && <p className="text-red-500 text-xs italic">{errors.priority}</p>}
+        </div>
+        <div className="w-full">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Duration
+          </label>
+          <select
+            value={duration}
+            onChange={(e) => {
+              setDuration(e.target.value);
+              setErrors((prevErrors) => ({ ...prevErrors, duration: '' }));
+            }}
+            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.priority && 'border-red-500'}`}
+          >
+            <option value="">Select duration</option>
+            <option value="in a week">In a Week</option>
+            <option value="in a month">In a Month</option>
+            <option value="in a year">In a Year</option>
+          </select>
+          {errors.duration && <p className="text-red-500 text-xs italic">{errors.duration}</p>}
         </div>
       </div>
 

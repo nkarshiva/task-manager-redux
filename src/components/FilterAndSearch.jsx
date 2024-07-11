@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FilterAndSearch = ({ setFilter, setSearch, setSorting }) => {
+const FilterAndSearch = ({ setFilter, setSearch, setSorting, setHighlight }) => {
   return (
     <div className="filter-and-search flex flex-col sm:flex-row gap-x-4 gap-y-4 mb-4">
       <div className="w-full">
@@ -17,6 +17,9 @@ const FilterAndSearch = ({ setFilter, setSearch, setSorting }) => {
           <option value="low">Low Priority</option>
           <option value="medium">Medium Priority</option>
           <option value="high">High Priority</option>
+          <option value="in a week">In a Week</option>
+          <option value="in a month">In a Month</option>
+          <option value="in a year">In a Year</option>
         </select>
       </div>
       <div className="w-full">
@@ -25,7 +28,10 @@ const FilterAndSearch = ({ setFilter, setSearch, setSorting }) => {
         </label>
         <input
           type="text"
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => {
+            setHighlight(e.target.value)
+            setSearch(e.target.value)
+          }}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>

@@ -11,6 +11,7 @@ const App = () => {
 
   const [filter, setFilter] = useState('');
   const [search, setSearch] = useState('');
+  const [highlight, setHighlight] = useState('')
   const [sorting, setSorting] = useState({ field: '', order: 'asc' });
   const [editingTask, setEditingTask] = useState(null);
 
@@ -37,9 +38,27 @@ const App = () => {
         return task.completed;
       } else if (filter === 'not_completed') {
         return !task.completed;
-      } else if (filter) {
+      }
+      else if (filter === "in a week") {
+        return task.duration === filter;
+      }
+      else if (filter === "in a month") {
+        return task.duration === filter;
+      }
+      else if (filter === "in a year") {
+        return task.duration === filter;
+      }
+      else if (filter === "low") {
         return task.priority === filter;
-      } else {
+      }
+      else if (filter === "medium") {
+        return task.priority === filter;
+      }
+      else if (filter === "high") {
+        return task.priority === filter;
+      }
+
+      else {
         return true;
       }
     })
@@ -71,12 +90,14 @@ const App = () => {
         setFilter={setFilter}
         setSearch={setSearch}
         setSorting={setSorting}
+        setHighlight={setHighlight}
       />
       <TaskList
         tasks={filteredAndSortedTasks}
         editTask={handleEditTask}
         deleteTask={(index) => dispatch(deleteTask(index))}
         toggleComplete={handleToggleComplete}
+        highlight={highlight}
       />
     </div>
   );
